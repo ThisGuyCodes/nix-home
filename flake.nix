@@ -29,6 +29,6 @@
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .#Traviss-MacBook-Pro
     darwinConfigurations."Traviss-MacBook-Pro" = setup;
-    darwinConfigurations."BL-travis-johnson.system" = setup;
+    darwinConfigurations."BL-travis-johnson" = setup;
   };
 }
