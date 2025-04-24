@@ -34,7 +34,7 @@
       "zed"
       "todoist"
       "rectangle-pro"
-      "podman-desktop"
+      # "podman-desktop"
       "1password-cli"
     ];
   };

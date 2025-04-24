@@ -43,6 +43,8 @@
     pkgs.opentofu
     pkgs.awscli2
     pkgs.aws-vault
+    pkgs.podman
+    pkgs.podman-tui
 
     # dev env stuff
     pkgs.zed-editor
@@ -82,6 +84,41 @@
   # if you don't want to manage your shell through Home Manager.
   home.sessionVariables = {
     EDITOR = "nvim";
+  };
+
+  programs.zed-editor = {
+    enable = true;
+    extensions = [
+      "terraform"
+      "nix"
+      "golangci-lint"
+      "mcp-server-github"
+      "mcp-server-linear"
+      "ruby"
+      "make"
+      "dockerfile"
+      "duckyscript"
+      "starlark"
+      "deno"
+      "gleam"
+      "go-snippits"
+      "templ"
+      "gosum"
+      "helm"
+      "mermaid"
+      "nginx"
+      "tmux"
+      "typos"
+      "ansible"
+      "vhs"
+      "wgsl-wesl"
+      "xml"
+      "superhtml"
+      "ssh-config"
+      "sql"
+    ];
+    userKeymaps = {};
+    userSettings = {};
   };
 
   programs.mise = {
