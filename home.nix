@@ -1,4 +1,3 @@
-
 { config, pkgs, ... }:
 
 {
@@ -38,7 +37,7 @@
     pkgs.k9s
     pkgs.kubectl
     #pkgs.terragrunt
-    (pkgs.callPackage ./terragrunt.nix {})
+    (pkgs.callPackage ./terragrunt.nix { })
     #(pkgs.callPackage ./go-mockery.nix {})
     pkgs.opentofu
     pkgs.awscli2
@@ -54,6 +53,7 @@
     # lsps
     pkgs.nixd
     pkgs.nil
+    pkgs.nixfmt
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -82,9 +82,7 @@
   #  /etc/profiles/per-user/davish/etc/profile.d/hm-session-vars.sh
   #
   # if you don't want to manage your shell through Home Manager.
-  home.sessionVariables = {
-    EDITOR = "nvim";
-  };
+  home.sessionVariables = { EDITOR = "nvim"; };
 
   programs.zed-editor = {
     enable = true;
@@ -121,30 +119,25 @@
       "wgsl-wesl"
       "xml"
     ];
-    userKeymaps = {};
+    userKeymaps = { };
     userSettings = {
-      features = {
-        edit_prediction_provider = "copilot";
-      };
+      features = { edit_prediction_provider = "copilot"; };
       format_on_save = "on";
       vim_mode = true;
       journal = {
         path = "-";
         hour_format = "hour24";
       };
-      tabs = {
-        git_status = true;
-      };
+      tabs = { git_status = true; };
       relative_line_numbers = true;
       soft_wrap = "editor_width";
       preferred_line_length = 120;
-      wrap_guides = [80 120];
+      wrap_guides = [ 80 120 ];
       lsp = {
+        nil.initialization_options = { formatting.command = [ "nixfmt" ]; };
         terraform-ls = {
           initialization_options = {
-            experimentalFeatures = {
-              prefillRequiredFields = true;
-            };
+            experimentalFeatures.prefillRequiredFields = true;
           };
         };
       };
@@ -168,25 +161,17 @@
     userEmail = "travis@thisguy.codes";
     lfs.enable = true;
     extraConfig = {
-      init = {
-        defaultBranch = "main";
-      };
-      push = {
-        autoSetupRemote = true;
-      };
+      init = { defaultBranch = "main"; };
+      push = { autoSetupRemote = true; };
     };
   };
 
   programs.gh = {
     enable = true;
-    settings = {
-      git_protocol = "ssh";
-    };
+    settings = { git_protocol = "ssh"; };
   };
 
-  programs.gh-dash = {
-    enable = true;
-  };
+  programs.gh-dash = { enable = true; };
 
   programs.ssh = {
     enable = true;
@@ -195,7 +180,8 @@
     controlPersist = "10m";
     forwardAgent = true;
     hashKnownHosts = true;
-    extraConfig = "IdentityAgent %d/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh";
+    extraConfig =
+      "IdentityAgent %d/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh";
   };
 
   programs.ghostty = {
@@ -217,11 +203,7 @@
     enableVteIntegration = true;
     autocd = true;
     autosuggestion.enable = true;
-    autosuggestion.strategy = [
-      "match_prev_cmd"
-      "history"
-      "completion"
-    ];
+    autosuggestion.strategy = [ "match_prev_cmd" "history" "completion" ];
     #initExtra = "eval \"\$(${pkgs.zellij}/bin/zellij setup --generate-completion zsh)\"";
     history = {
       append = true;
