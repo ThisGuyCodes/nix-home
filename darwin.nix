@@ -5,26 +5,18 @@
     # pkgs.ghostty
   ];
 
-  fonts.packages = [
-    pkgs.nerd-fonts.jetbrains-mono
-  ];
+  fonts.packages = [ pkgs.nerd-fonts.jetbrains-mono ];
 
   homebrew = {
     enable = true;
-    global = {
-      autoUpdate = true;
-    };
+    global = { autoUpdate = true; };
     onActivation = {
       autoUpdate = true;
       cleanup = "uninstall";
       upgrade = true;
     };
-    brews = [
-      "withgraphite/tap/graphite"
-    ];
-    taps = [
-      "withgraphite/tap"
-    ];
+    brews = [ "withgraphite/tap/graphite" ];
+    taps = [ "withgraphite/tap" ];
     casks = [
       "secretive"
       "discord"
@@ -39,9 +31,9 @@
     ];
   };
 
-  environment.shells = [
-    pkgs.zsh
-  ];
+  environment.shells = [ pkgs.zsh ];
+
+  system.keyboard = { remapCapsLockToEscape = true; };
 
   system.defaults = {
     finder = {
@@ -55,7 +47,12 @@
       GuestEnabled = false;
       DisableConsoleAccess = true;
     };
-    menuExtraClock.Show24Hour = true;
+
+    menuExtraClock = {
+      Show24Hour = true;
+      ShowDate = 2;
+      ShowDayOfWeek = true;
+    };
 
     screensaver = {
       askForPassword = true;
@@ -71,6 +68,15 @@
     };
 
     SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
+
+    NSGlobalDomain = {
+      AppleInterfaceStyleSwitchesAutomatically = true;
+      AppleShowAllFiles = true;
+      NSAutomaticCapitalizationEnabled = false;
+      NSAutomaticDashSubstitutionEnabled = false;
+      NSAutomaticSpellingCorrectionEnabled = false;
+      AppleICUForce24HourTime = true;
+    };
   };
 
   users.users.thisguy = {
@@ -87,7 +93,8 @@
   # programs.fish.enable = true;
 
   # Set Git commit hash for darwin-version.
-  system.configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
+  system.configurationRevision =
+    inputs.self.rev or inputs.self.dirtyRev or null;
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
