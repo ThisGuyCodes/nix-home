@@ -116,9 +116,38 @@
       "superhtml"
       "ssh-config"
       "sql"
+      "markdown-oxide"
+      "ruff"
+      "toml"
     ];
     userKeymaps = {};
-    userSettings = {};
+    userSettings = {
+      features = {
+        edit_prediction_provider = "copilot";
+      };
+      format_on_save = "on";
+      vim_mode = true;
+      journal = {
+        path = "-";
+        hour_format = "hour24";
+      };
+      tabs = {
+        git_status = true;
+      };
+      relative_line_numbers = true;
+      soft_wrap = "editor_width";
+      preferred_line_length = 120;
+      wrap_guides = [80 120];
+      lsp = {
+        terraform-ls = {
+          initialization_options = {
+            experimentalFeatures = {
+              prefillRequiredFields = true;
+            };
+          };
+        };
+      };
+    };
   };
 
   programs.mise = {
