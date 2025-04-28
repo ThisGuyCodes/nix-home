@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -205,6 +205,20 @@
     autosuggestion.enable = true;
     autosuggestion.strategy = [ "match_prev_cmd" "history" "completion" ];
     #initExtra = "eval \"\$(${pkgs.zellij}/bin/zellij setup --generate-completion zsh)\"";
+    initContent = ''
+      derive() {
+        zparseopts -E -D -- \
+          u=update \
+          -update=update
+        if [[ "$update" ]]; then
+          (
+            cd ~/.config/nix-darwin
+            nix flake update
+          )
+        fi
+        darwin-rebuild switch --flake ~/.config/nix-darwin
+      }
+    '';
     history = {
       append = true;
       expireDuplicatesFirst = true;
