@@ -93,6 +93,15 @@
   # Necessary for using flakes on this system.
   nix.settings.experimental-features = "nix-command flakes";
 
+  nix.optimise = {
+    automatic = true;
+    interval = {
+      Hour = 4;
+      Minute = 15;
+      Weekday = 7;
+    };
+  };
+
   # Enable alternative shell support in nix-darwin.
   # programs.fish.enable = true;
 
