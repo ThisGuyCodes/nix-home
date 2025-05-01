@@ -1,4 +1,4 @@
-{ config, pkgs, lib, roles, ... }:
+{ config, pkgs, lib, roles, tailconfig, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -255,6 +255,6 @@
 
   services.ollama = {
     enable = (builtins.elem "ollama" roles);
-    host = "100.97.56.50";
+    host = tailconfig.ip;
   };
 }

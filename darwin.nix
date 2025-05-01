@@ -1,4 +1,4 @@
-{ pkgs, lib, inputs, ... }: {
+{ pkgs, lib, inputs, roles, ... }: {
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = [
@@ -24,8 +24,12 @@
       cleanup = "uninstall";
       upgrade = true;
     };
-    brews = [ "withgraphite/tap/graphite" ];
-    taps = [ "withgraphite/tap" ];
+    brews = [ ] ++ (if builtins.elem "work" roles then
+      [ "withgraphite/tap/graphite" ]
+    else
+      [ ]);
+    taps = [ ]
+      ++ (if builtins.elem "work" roles then [ "withgraphite/tap" ] else [ ]);
     casks = [
       "secretive"
       "discord"
@@ -35,8 +39,7 @@
       "zed"
       "rectangle-pro"
       # "podman-desktop"
-      "1password-cli"
-    ];
+    ] ++ (if builtins.elem "work" roles then [ "1password-cli" ] else [ ]);
     masApps = {
       todoist = 585829637;
       openin = 1643649331;
