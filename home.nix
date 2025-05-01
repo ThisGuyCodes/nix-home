@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, roles, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -254,7 +254,7 @@
   programs.home-manager.enable = true;
 
   services.ollama = {
-    enable = true;
+    enable = (builtins.elem "ollama" roles);
     host = "100.97.56.50";
   };
 }
