@@ -41,6 +41,7 @@
       todoist = 585829637;
       openin = 1643649331;
       bitwarden = 1352778147;
+      tailscale = 1475387142;
     };
   };
 
