@@ -11,24 +11,23 @@
   };
 
   outputs = inputs@{ self, nix-darwin, home-manager, nixpkgs, ... }:
-  let
-    setup = nix-darwin.lib.darwinSystem {
-      modules = [
-        ./darwin.nix
-       	home-manager.darwinModules.home-manager
-       	{
-         	  home-manager.useGlobalPkgs = true;
-         	  home-manager.useUserPackages = true;
-         	  home-manager.users.thisguy = import ./home.nix;
-       	}
-      ];
-      specialArgs = { inherit inputs; };
+    let
+      setup = nix-darwin.lib.darwinSystem {
+        modules = [
+          ./darwin.nix
+          home-manager.darwinModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.thisguy = import ./home.nix;
+          }
+        ];
+        specialArgs = { inherit inputs; };
+      };
+    in {
+      # Build darwin flake using:
+      # $ darwin-rebuild build --flake .#Traviss-MacBook-Pro
+      darwinConfigurations."Traviss-MacBook-Pro" = setup;
+      darwinConfigurations."BL-travis-johnson" = setup;
     };
-  in
-  {
-    # Build darwin flake using:
-    # $ darwin-rebuild build --flake .#Traviss-MacBook-Pro
-    darwinConfigurations."Traviss-MacBook-Pro" = setup;
-    darwinConfigurations."BL-travis-johnson" = setup;
-  };
 }
