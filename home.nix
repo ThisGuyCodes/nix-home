@@ -252,4 +252,9 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  services.ollama = {
+    enable = true;
+    host = "100.97.56.50";
+  };
 }
