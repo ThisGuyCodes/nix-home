@@ -32,6 +32,8 @@
     #pkgs.ghostty
     #(pkgs.callPackage ./sigtop.nix {})
     pkgs.fd
+    pkgs.uv
+    pkgs.nodejs
     pkgs.bazelisk
     pkgs.ripgrep
     pkgs.k9s
@@ -44,6 +46,7 @@
     pkgs.aws-vault
     pkgs.podman
     pkgs.podman-tui
+    pkgs.ollama
 
     # dev env stuff
     pkgs.zed-editor
