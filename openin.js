@@ -11,7 +11,7 @@
   const isAWS = url.hostname.endsWith("aws.amazon.com");
   const isBabySubdomain = url.hostname.includes("babylist.");
   const isBabyPath = url.pathname.startsWith("babylist/");
-  const isGoogleWorkAuth = url.searchParams.get("authuser").endsWith("@babylist.com");
+  const isGoogleWorkAuth = url.searchParams.get("authuser")?.endsWith("@babylist.com");
 
   let isWork = false;
 
