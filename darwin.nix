@@ -24,7 +24,7 @@
       cleanup = "uninstall";
       upgrade = true;
     };
-    brews = [ ] ++ (if builtins.elem "work" roles then
+    brews = [ "mas" ] ++ (if builtins.elem "work" roles then
       [ "withgraphite/tap/graphite" ]
     else
       [ ]);
