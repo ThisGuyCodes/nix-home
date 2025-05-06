@@ -148,6 +148,7 @@
       #   };
       # };
       lsp = {
+        typos.initialization_options.diagnosticSeverity = "Hint";
         nil.initialization_options = { formatting.command = [ "nixfmt" ]; };
         terraform-ls = {
           initialization_options = {
