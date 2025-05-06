@@ -138,6 +138,15 @@
       soft_wrap = "editor_width";
       preferred_line_length = 120;
       wrap_guides = [ 80 120 ];
+      # context_servers = {
+      #   linear = {
+      #     command = {
+      #       path = "npx";
+      #       args = [ "-y" "mcp-remote" "https://mcp.linear.app/sse" ];
+      #     };
+      #     settings = { };
+      #   };
+      # };
       lsp = {
         nil.initialization_options = { formatting.command = [ "nixfmt" ]; };
         terraform-ls = {
