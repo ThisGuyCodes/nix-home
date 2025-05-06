@@ -15,7 +15,7 @@
       setup = { tailconfig ? {
         ip = "127.0.0.1";
         name = "";
-      }, roles ? [ ], ... }:
+      }, roles ? [ ], taildomain ? "giraffe-ide.ts.net", ... }:
         nix-darwin.lib.darwinSystem {
           modules = [
             ./darwin.nix
@@ -24,13 +24,14 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.thisguy = import ./home.nix;
-              home-manager.extraSpecialArgs = { inherit roles; };
+              home-manager.extraSpecialArgs = {
+                inherit roles taildomain tailconfig;
+              };
             }
           ];
           specialArgs = {
             inherit inputs;
-            inherit roles;
-            taildomain = "giraffe-ide.ts.net";
+            inherit roles taildomain tailconfig;
           };
         };
     in {

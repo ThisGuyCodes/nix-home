@@ -1,4 +1,5 @@
-{ config, pkgs, lib, roles, tailconfig, ... }:
+# unused: config
+{ pkgs, lib, roles, tailconfig, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
