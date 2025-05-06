@@ -221,20 +221,61 @@
     autosuggestion.enable = true;
     autosuggestion.strategy = [ "match_prev_cmd" "history" "completion" ];
     #initExtra = "eval \"\$(${pkgs.zellij}/bin/zellij setup --generate-completion zsh)\"";
-    initContent = ''
-      derive() {
-        zparseopts -E -D -- \
-          u=update \
-          -update=update
-        if [[ "$update" ]]; then
-          (
-            cd ~/.config/nix-darwin
-            nix flake update
-          )
-        fi
-        darwin-rebuild switch --flake ~/.config/nix-darwin
-      }
-    '';
+    initContent = let
+      entries = {
+        deriveFunc = lib.mkOrder 1000 ''
+          derive() {
+            zparseopts -E -D -- \
+              u=update \
+              -update=update
+            if [[ "$update" ]]; then
+              (
+                cd ~/.config/nix-darwin
+                nix flake update
+              )
+            fi
+            darwin-rebuild switch --flake ~/.config/nix-darwin
+          }
+        '';
+        viMode = lib.mkOrder 2000 ''
+          bindkey -v
+        '';
+        disableSystemCompinit = lib.mkOrder 0 ''
+          skip_global_compinit=1
+        '';
+        fuzzyCompletions = lib.mkOrder 2000 ''
+          zstyle ':completion:*' completer _complete _match _approximate
+          zstyle ':completion:*:match:*' original only
+          zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3>7?7:($#PREFIX+$#SUFFIX)/3))numeric)'
+        '';
+        prettyCompletions = lib.mkOrder 2000 ''
+          zstyle ':completion:*:matches' group 'yes'
+          zstyle ':completion:*:options' description 'yes'
+          zstyle ':completion:*:options' auto-description '%d'
+          zstyle ':completion:*:corrections' format ' %F{green}-- %d (errors: %e) --%f'
+          zstyle ':completion:*:descriptions' format ' %F{yellow}-- %d --%f'
+          zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
+          zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
+          zstyle ':completion:*:default' list-prompt '%S%M matches%s'
+          zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
+          zstyle ':completion:*' group-name '''
+          zstyle ':completion:*' verbose yes
+          zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+          zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
+          zstyle ':completion:*' use-cache true
+          zstyle ':completion:*' rehash true
+        '';
+        menuCompletions = lib.mkOrder 2000 ''
+          zstyle ':completion:*' menu select
+        '';
+        colorCompletions = lib.mkOrder 2000 ''
+          zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS}
+        '';
+        # forGit = lib.mkOrder 2000 ''
+        #   zi as'null' wait'1' lucid for sbin wfxr/forgit
+        # '';
+      };
+    in lib.mkMerge (lib.attrValues entries);
     history = {
       append = true;
       expireDuplicatesFirst = true;
