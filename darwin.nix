@@ -28,7 +28,7 @@
       [ "withgraphite/tap/graphite" ]
     else
       [ ]);
-    taps = [ ]
+    taps = [ "brewforge/extras" ]
       ++ (if builtins.elem "work" roles then [ "withgraphite/tap" ] else [ ]);
     casks = [
       "secretive"
