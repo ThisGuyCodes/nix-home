@@ -10,7 +10,7 @@
   const isGithub = url.hostname.endsWith("github.com");
   const isAWS = url.hostname.endsWith("aws.amazon.com");
   const isBabySubdomain = url.hostname.includes("babylist.");
-  const isBabyPath = url.pathname.startsWith("babylist/");
+  const isBabyPath = url.pathname.startsWith("/babylist/");
   const isGoogleWorkAuth = url.searchParams.get("authuser")?.endsWith("@babylist.com");
 
   let isWork = false;
