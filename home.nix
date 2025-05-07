@@ -1,5 +1,5 @@
 # unused: config
-{ pkgs, lib, roles, tailconfig, ... }:
+{ config, pkgs, lib, roles, tailconfig, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -13,6 +13,8 @@
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
   home.stateVersion = "25.05"; # Please read the comment before changing.
+
+  home.sessionPath = [ "$HOME/.local/bin" "/opt/homebrew/bin" ];
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -36,6 +38,7 @@
     pkgs.uv
     pkgs.nodejs
     pkgs.bazelisk
+    pkgs.bazel-watcher
     pkgs.ripgrep
     pkgs.k9s
     pkgs.kubectl
@@ -50,9 +53,11 @@
     pkgs.ollama
 
     # dev env stuff
-    pkgs.zed-editor
+    # pkgs.zed-editor
     pkgs.devenv
     pkgs.direnv
+
+    pkgs.ffmpeg
 
     # lsps
     pkgs.nixd
@@ -76,6 +81,10 @@
     #   org.gradle.daemon.idletimeout=3600000
     # '';
     ".config/starship.toml".source = dotfiles/starship.toml;
+    ".local/bin/bazel".source =
+      config.lib.file.mkOutOfStoreSymlink "${pkgs.bazelisk}/bin/bazelisk";
+    # ".local/bin/zed".source =
+    #   config.lib.file.mkOutOfStoreSymlink "/opt/homebrew/bin/zed-preview";
   };
 
   # You can also manage environment variables but you will have to manually
@@ -91,7 +100,7 @@
   home.sessionVariables = { EDITOR = "nvim"; };
 
   programs.zed-editor = {
-    enable = true;
+    enable = false;
     extensions = [
       "ansible"
       "deno"
@@ -153,6 +162,55 @@
         nil.initialization_options.formatting.command = [ "nixfmt" ];
         terraform-ls.initialization_options = {
           experimentalFeatures.prefillRequiredFields = true;
+        };
+      };
+      agent = {
+        always_allow_tool_actions = true;
+        default_model = {
+          provider = "google";
+          model = "gemini-2.5-flash-preview-04-17";
+        };
+        version = "2";
+      };
+      context_servers = {
+        Github = {
+          command = {
+            path = "podman";
+            args = [
+              "run"
+              "-i"
+              "--rm"
+              "-e"
+              "GITHUB_PERSONAL_ACCESS_TOKEN"
+              "ghcr.io/github/github-mcp-server"
+            ];
+            env = { GITHUB_PERSONAL_ACCESS_TOKEN = "NOOP"; };
+          };
+          settings = { };
+        };
+        Jira = {
+          command = {
+            path = "npx";
+            args = [ "-y" "mcp-remote" "https://mcp.atlassian.com/v1/sse" ];
+            env = null;
+          };
+          settings = { };
+        };
+        "Cloudflare Docs" = {
+          command = {
+            path = "npx";
+            args = [ "-y" "mcp-remote" "https://docs.mcp.cloudflare.com/sse" ];
+            env = null;
+          };
+          settings = { };
+        };
+        linear = {
+          command = {
+            path = "npx";
+            args = [ "-y" "mcp-remote" "https://mcp.linear.app/sse" ];
+            env = null;
+          };
+          settings = { };
         };
       };
     };
