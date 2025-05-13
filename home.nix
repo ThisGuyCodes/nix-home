@@ -14,7 +14,7 @@
   # release notes.
   home.stateVersion = "25.05"; # Please read the comment before changing.
 
-  home.sessionPath = [ "$HOME/.local/bin" "/opt/homebrew/bin" ];
+  home.sessionPath = [ "$HOME/.local/bin" "/opt/homebrew/bin" "$HOME/go/bin" ];
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
