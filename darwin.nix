@@ -38,7 +38,7 @@
       "ghostty"
       "signal"
       "rectangle-pro"
-      "zed@preview"
+      "zed"
       # "podman-desktop"
     ] ++ (if builtins.elem "work" roles then [ "1password-cli" ] else [ ]);
     masApps = {
