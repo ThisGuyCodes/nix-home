@@ -5,6 +5,9 @@
   const url = ctx.url;
   const srcApp = ctx.getSourceApp();
 
+  const workHostnames = ["mcp.atlassian.com"];
+  const personalHostnames = ["mcp.linear.app"];
+
   const workApps = ["/Applications/Slack.app"];
 
   const isGithub = url.hostname.endsWith("github.com");
@@ -12,8 +15,13 @@
   const isBabySubdomain = url.hostname.includes("babylist.");
   const isBabyPath = url.pathname.startsWith("/babylist/");
   const isGoogleWorkAuth = url.searchParams.get("authuser")?.endsWith("@babylist.com");
+  const isWorkHostname = workHostnames.includes(url.hostname);
 
   let isWork = false;
+
+  if (isWorkHostname) {
+    isWork = true;
+  }
 
   if (workApps.includes(srcApp.path)) {
     isWork = true;
@@ -39,5 +47,21 @@
     apps.forEach(function (app) {
       app.visible = app.name == "Google Chrome (work)";
     });
+    return;
+  }
+
+  const isPersonalHostname = personalHostnames.includes(url.hostname);
+
+  let isPersonal = false;
+
+  if (isPersonalHostname) {
+    isPersonal = true;
+  }
+
+  if (isPersonal) {
+    apps.forEach(function (app) {
+      app.visible = app.name == "Google Chrome (personal)";
+    });
+    return;
   }
 })();
