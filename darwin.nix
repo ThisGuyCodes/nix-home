@@ -51,6 +51,7 @@
 
   environment.shells = [ pkgs.zsh ];
 
+  system.primaryUser = "thisguy";
   system.keyboard = { remapCapsLockToEscape = true; };
 
   system.defaults = {
