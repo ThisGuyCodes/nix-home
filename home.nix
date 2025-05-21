@@ -292,7 +292,7 @@
                 nix flake update
               )
             fi
-            darwin-rebuild switch --flake ~/.config/nix-darwin
+            sudo darwin-rebuild switch --flake ~/.config/nix-darwin
           }
         '';
         viMode = lib.mkOrder 2000 ''
