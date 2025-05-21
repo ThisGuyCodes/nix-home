@@ -1,3 +1,55 @@
+/**
+ * @typedef {object} OpenContextApp
+ * @property {string} name - the name of the app
+ * @property {boolean} running - check if app is running
+ * @property {String} bundleIdentifier - the bundle identifier of the app
+ * @property {boolean} visible - you can get or set this property, this is where you can apply your logic, for the list of the apps, that you are getting from OpenIn, you can configure which one you want to see in the result list
+ * @property {string} path - The file system path to the application.
+ * @property {boolean} visible - Whether the application is visible or not.
+ */
+
+/**
+ * @typedef {object} OpenContextSourceApp
+ * @property {string} path - the path of the application, that sent an open request
+ */
+
+/**
+ * @typedef {object} SearchParams
+ * @property {function(String, String)} append - append the search key value
+ * @property {function(String)} delete - delete all query items with the name
+ * @property {function(String): String} get - get the first value of the query with name
+ * @property {function(String): []String} getAll - get all values as array of the query with name
+ * @property {function(String): boolean} has - check if the query has a key
+ * @property {function(String, String)} set - set the name and value for the search
+ * @property {function(): []String} keys - get the array of all keys
+ */
+
+/**
+ * @typedef {object} URL
+ * @property {string} fragment - everything after #
+ * @property {string} host - hostname and port
+ * @property {string} hostname - just a domain, hostname
+ * @property {string} href - string representation of full url
+ * @property {string} username - username
+ * @property {string} password - password
+ * @property {string} pathname - the path
+ * @property {string} port - port
+ * @property {string} protocol - scheme
+ * @property {string} search - query of the url
+ * @property {SearchParams} searchParams - object to work on url query
+ */
+
+/**
+ * @typedef {object} CTX
+ * @property {URL} url - returns the URL object
+ * @property {function(): OpenContextSourceApp} getSourceApp - returns OpenContextSourceApp object, that can tell you if OpenIn recognized the application where link was opened
+ * @property {function(): OpenContextApp[]} getApps - returns the array of apps, where OpenIn logic already applied, but you can override it, array of OpenContextApp
+ * @property {function(): boolean} isForPrinting - checks if file was requested to be opened for printing
+ */
+
+/** @type {CTX} */
+var ctx;
+
 (function () {
   // the list of available apps to send link to
   const apps = ctx.getApps();
@@ -9,6 +61,7 @@
   const personalHostnames = ["mcp.linear.app"];
 
   const workApps = ["/Applications/Slack.app"];
+  const personalApps = ["/Applications/Discord.app"];
 
   const isGithub = url.hostname.endsWith("github.com");
   const isAWS = url.hostname.endsWith("aws.amazon.com");
@@ -17,31 +70,12 @@
   const isGoogleWorkAuth = url.searchParams.get("authuser")?.endsWith("@babylist.com");
   const isWorkHostname = workHostnames.includes(url.hostname);
 
-  let isWork = false;
+  const isWorkApp = workApps.includes(srcApp.path);
 
-  if (isWorkHostname) {
-    isWork = true;
-  }
-
-  if (workApps.includes(srcApp.path)) {
-    isWork = true;
-  }
-
-  if (isBabySubdomain) {
-    isWork = true;
-  }
-
-  if (isAWS) {
-    isWork = true;
-  }
-
-  if (isGoogleWorkAuth) {
-    isWork = true;
-  }
-
-  if (isGithub && isBabyPath) {
-    isWork = true;
-  }
+  [].some();
+  const isWork = [isWorkHostname, isWorkApp, isBabySubdomain, isAWS, isGoogleWorkAuth, isGithub && isBabyPath].some(
+    (it) => it,
+  );
 
   if (isWork) {
     apps.forEach(function (app) {
@@ -51,12 +85,9 @@
   }
 
   const isPersonalHostname = personalHostnames.includes(url.hostname);
+  const isPersonalApp = personalApps.includes(srcApp.path);
 
-  let isPersonal = false;
-
-  if (isPersonalHostname) {
-    isPersonal = true;
-  }
+  const isPersonal = [isPersonalHostname, isPersonalApp].some((it) => it);
 
   if (isPersonal) {
     apps.forEach(function (app) {
