@@ -85,7 +85,6 @@ var ctx;
 
   const isWorkApp = workApps.includes(srcApp.path);
 
-  [].some();
   const isWork = [isWorkHostname, isWorkApp, isBabySubdomain, isAWS, isGoogleWorkAuth, isGithub && isBabyPath].some(
     (it) => it,
   );
