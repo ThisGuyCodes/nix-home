@@ -1,16 +1,22 @@
 /**
  * @typedef {object} OpenContextApp
- * @property {string} name - the name of the app
+ * @property {String} name - the name of the app
  * @property {boolean} running - check if app is running
  * @property {String} bundleIdentifier - the bundle identifier of the app
  * @property {boolean} visible - you can get or set this property, this is where you can apply your logic, for the list of the apps, that you are getting from OpenIn, you can configure which one you want to see in the result list
- * @property {string} path - The file system path to the application.
- * @property {boolean} visible - Whether the application is visible or not.
+ * @property {String} path - The file system path to the application.
+ */
+
+/**
+ * @typedef {object} OpenContextModifiers
+ * @property {boolean} shift - shift pressed
+ * @property {boolean} option - option pressed
+ * @property {boolean} command - command pressed
  */
 
 /**
  * @typedef {object} OpenContextSourceApp
- * @property {string} path - the path of the application, that sent an open request
+ * @property {String} path - the path of the application, that sent an open request
  */
 
 /**
@@ -18,24 +24,24 @@
  * @property {function(String, String)} append - append the search key value
  * @property {function(String)} delete - delete all query items with the name
  * @property {function(String): String} get - get the first value of the query with name
- * @property {function(String): []String} getAll - get all values as array of the query with name
+ * @property {function(String): String[]} getAll - get all values as array of the query with name
  * @property {function(String): boolean} has - check if the query has a key
  * @property {function(String, String)} set - set the name and value for the search
- * @property {function(): []String} keys - get the array of all keys
+ * @property {function(): String[]} keys - get the array of all keys
  */
 
 /**
  * @typedef {object} URL
- * @property {string} fragment - everything after #
- * @property {string} host - hostname and port
- * @property {string} hostname - just a domain, hostname
- * @property {string} href - string representation of full url
- * @property {string} username - username
- * @property {string} password - password
- * @property {string} pathname - the path
- * @property {string} port - port
- * @property {string} protocol - scheme
- * @property {string} search - query of the url
+ * @property {String} fragment - everything after #
+ * @property {String} host - hostname and port
+ * @property {String} hostname - just a domain, hostname
+ * @property {String} href - string representation of full url
+ * @property {String} username - username
+ * @property {String} password - password
+ * @property {String} pathname - the path
+ * @property {String} port - port
+ * @property {String} protocol - scheme
+ * @property {String} search - query of the url
  * @property {SearchParams} searchParams - object to work on url query
  */
 
@@ -45,9 +51,16 @@
  * @property {function(): OpenContextSourceApp} getSourceApp - returns OpenContextSourceApp object, that can tell you if OpenIn recognized the application where link was opened
  * @property {function(): OpenContextApp[]} getApps - returns the array of apps, where OpenIn logic already applied, but you can override it, array of OpenContextApp
  * @property {function(): boolean} isForPrinting - checks if file was requested to be opened for printing
+ * @property {function(): OpenContextModifiers} getModifiers - returns OpenContextModifiers object, that can tell which modifiers are pressed when link or file was requested to be opened by user
+ * @property {function(): boolean} isShareMenu - checks if the link was sent by the Share Menu Open in OpenIn
+ * @property {function(): boolean} isHandoff - checks if the link was sent by the Handoff in OpenIn
+ * @property {function(): String} getFocusHint - get focus hint configured with the System Settings Focus (empty string if none is configured)
  */
 
-/** @type {CTX} */
+/**
+ * @type {CTX}
+ * @global
+ */
 var ctx;
 
 (function () {
