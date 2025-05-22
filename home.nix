@@ -52,6 +52,8 @@
     pkgs.podman-tui
     pkgs.ollama
 
+    pkgs.graphviz
+
     # dev env stuff
     # pkgs.zed-editor
     pkgs.devenv
