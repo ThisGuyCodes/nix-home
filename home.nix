@@ -43,9 +43,9 @@
     pkgs.k9s
     pkgs.kubectl
     #pkgs.terragrunt
-    (pkgs.callPackage ./terragrunt.nix { })
+    # (pkgs.callPackage ./terragrunt.nix { })
     #(pkgs.callPackage ./go-mockery.nix {})
-    pkgs.opentofu
+    # pkgs.opentofu
     pkgs.awscli2
     pkgs.aws-vault
     pkgs.podman
