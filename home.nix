@@ -42,6 +42,8 @@
     pkgs.ripgrep
     pkgs.k9s
     pkgs.kubectl
+    pkgs.pv
+    pkgs.dust
     #pkgs.terragrunt
     # (pkgs.callPackage ./terragrunt.nix { })
     #(pkgs.callPackage ./go-mockery.nix {})
