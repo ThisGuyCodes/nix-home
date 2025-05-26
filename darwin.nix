@@ -25,9 +25,20 @@
       cleanup = "uninstall";
       upgrade = true;
     };
-    brews = [ "mas" ] ++ (if builtins.elem "work" roles then
-      [ "withgraphite/tap/graphite" ]
-    else
+    brews = [ "mas" ] ++ (if builtins.elem "work" roles then [
+      "withgraphite/tap/graphite"
+
+      # ugh, ruby-build...
+      "openssl@3"
+      "readline"
+      "libyaml"
+      "gmp"
+      "autoconf"
+
+      # ugh, web...
+      "shared-mime-info"
+      "mysql@8.0"
+    ] else
       [ ]);
     taps = [ "brewforge/extras" ]
       ++ (if builtins.elem "work" roles then [ "withgraphite/tap" ] else [ ]);
