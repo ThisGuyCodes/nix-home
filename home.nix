@@ -376,8 +376,12 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  services.ollama = {
-    enable = (builtins.elem "ollama" roles);
+  services.ollama = if builtins.elem "ollama" roles then {
+    enable = true;
     host = tailconfig.ip;
-  };
+  } else if builtins.elem "work" roles then {
+    enable = true;
+    host = "localhost";
+  } else
+    { };
 }
