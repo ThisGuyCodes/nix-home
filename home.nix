@@ -101,7 +101,11 @@
   #  /etc/profiles/per-user/davish/etc/profile.d/hm-session-vars.sh
   #
   # if you don't want to manage your shell through Home Manager.
-  home.sessionVariables = { EDITOR = "nvim"; };
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    TG_PROVIDER_CACHE = "1";
+    TG_STRICT_CONTROL = "skip-dependencies-inputs";
+  };
 
   programs.zed-editor = {
     enable = false;
