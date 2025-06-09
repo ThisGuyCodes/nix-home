@@ -44,6 +44,8 @@
     pkgs.kubectl
     pkgs.pv
     pkgs.dust
+    pkgs.jq
+    pkgs.yq
     #pkgs.terragrunt
     # (pkgs.callPackage ./terragrunt.nix { })
     #(pkgs.callPackage ./go-mockery.nix {})
