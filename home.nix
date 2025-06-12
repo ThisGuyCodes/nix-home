@@ -46,6 +46,8 @@
     pkgs.dust
     pkgs.jq
     pkgs.yq
+    pkgs.tree
+    pkgs.comby
     #pkgs.terragrunt
     # (pkgs.callPackage ./terragrunt.nix { })
     #(pkgs.callPackage ./go-mockery.nix {})
