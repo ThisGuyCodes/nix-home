@@ -205,14 +205,14 @@
           };
           settings = { };
         };
-        Jira = {
-          command = {
-            path = "npx";
-            args = [ "-y" "mcp-remote" "https://mcp.atlassian.com/v1/sse" ];
-            env = null;
-          };
-          settings = { };
-        };
+        # Jira = {
+        #   command = {
+        #     path = "npx";
+        #     args = [ "-y" "mcp-remote" "https://mcp.atlassian.com/v1/sse" ];
+        #     env = null;
+        #   };
+        #   settings = { };
+        # };
         "Cloudflare Docs" = {
           command = {
             path = "npx";
