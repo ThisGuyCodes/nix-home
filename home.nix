@@ -273,6 +273,11 @@
     hashKnownHosts = true;
     extraConfig =
       "IdentityAgent %d/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh";
+    matchBlocks = {
+      "bastion-pentest25.babylist-prod.com" = {
+        identityFile = "~/.ssh/aws-codecommit";
+      };
+    };
   };
 
   programs.ghostty = {
