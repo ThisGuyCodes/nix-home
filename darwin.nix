@@ -40,7 +40,7 @@
       "mysql@8.0"
     ] else
       [ ]);
-    taps = [ "brewforge/extras" ]
+    taps = [ "brewforge/extras" "grishka/grishka" ]
       ++ (if builtins.elem "work" roles then [ "withgraphite/tap" ] else [ ]);
     casks = [
       "secretive"
@@ -50,6 +50,10 @@
       "signal"
       "rectangle-pro"
       "zed"
+      # {
+      #   name = "grishka/grishka/neardrop";
+      #   args = { no_quarantine = true; };
+      # }
       # "podman-desktop"
     ] ++ (if builtins.elem "work" roles then [ "1password-cli" ] else [ ]);
     masApps = {
