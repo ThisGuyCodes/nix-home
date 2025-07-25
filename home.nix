@@ -47,7 +47,7 @@
     pkgs.jq
     pkgs.yq
     pkgs.tree
-    pkgs.comby
+    # pkgs.comby ocaml is borked?
     pkgs.yt-dlp
     #pkgs.terragrunt
     # (pkgs.callPackage ./terragrunt.nix { })
