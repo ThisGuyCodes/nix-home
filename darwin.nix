@@ -1,5 +1,11 @@
 # unused: lib
-{ pkgs, inputs, roles, ... }: {
+{
+  pkgs,
+  inputs,
+  roles,
+  ...
+}:
+{
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = [
@@ -7,7 +13,10 @@
   ];
 
   nix.settings = {
-    substituters = [ "https://devenv.cachix.org" "https://cache.nixos.org" ];
+    substituters = [
+      "https://devenv.cachix.org"
+      "https://cache.nixos.org"
+    ];
     trusted-public-keys = [
       # this is the default one
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
@@ -19,29 +28,42 @@
 
   homebrew = {
     enable = true;
-    global = { autoUpdate = true; };
+    global = {
+      autoUpdate = true;
+    };
     onActivation = {
       autoUpdate = true;
       cleanup = "uninstall";
       upgrade = true;
     };
-    brews = [ "mas" ] ++ (if builtins.elem "work" roles then [
-      "withgraphite/tap/graphite"
+    brews = [
+      "mas"
+    ]
+    ++ (
+      if builtins.elem "work" roles then
+        [
+          "withgraphite/tap/graphite"
 
-      # ugh, ruby-build...
-      "openssl@3"
-      "readline"
-      "libyaml"
-      "gmp"
-      "autoconf"
+          # ugh, ruby-build...
+          "openssl@3"
+          "readline"
+          "libyaml"
+          "gmp"
+          "autoconf"
 
-      # ugh, web...
-      "shared-mime-info"
-      "mysql@8.0"
-    ] else
-      [ ]);
-    taps = [ "brewforge/extras" "grishka/grishka" ]
-      ++ (if builtins.elem "work" roles then [ "withgraphite/tap" ] else [ ]);
+          # ugh, web...
+          "shared-mime-info"
+          "mysql@8.0"
+          "ast-grep"
+        ]
+      else
+        [ ]
+    );
+    taps = [
+      "brewforge/extras"
+      "grishka/grishka"
+    ]
+    ++ (if builtins.elem "work" roles then [ "withgraphite/tap" ] else [ ]);
     casks = [
       "secretive"
       "discord"
@@ -55,7 +77,8 @@
       #   args = { no_quarantine = true; };
       # }
       # "podman-desktop"
-    ] ++ (if builtins.elem "work" roles then [ "1password-cli" ] else [ ]);
+    ]
+    ++ (if builtins.elem "work" roles then [ "1password-cli" ] else [ ]);
     masApps = {
       todoist = 585829637;
       openin = 1643649331;
@@ -67,7 +90,9 @@
   environment.shells = [ pkgs.zsh ];
 
   system.primaryUser = "thisguy";
-  system.keyboard = { remapCapsLockToEscape = true; };
+  system.keyboard = {
+    remapCapsLockToEscape = true;
+  };
 
   system.defaults = {
     finder = {
@@ -136,8 +161,7 @@
   # programs.fish.enable = true;
 
   # Set Git commit hash for darwin-version.
-  system.configurationRevision =
-    inputs.self.rev or inputs.self.dirtyRev or null;
+  system.configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
