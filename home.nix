@@ -1,5 +1,12 @@
 # unused: config
-{ config, pkgs, lib, roles, tailconfig, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  roles,
+  tailconfig,
+  ...
+}:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -14,7 +21,11 @@
   # release notes.
   home.stateVersion = "25.05"; # Please read the comment before changing.
 
-  home.sessionPath = [ "$HOME/.local/bin" "/opt/homebrew/bin" "$HOME/go/bin" ];
+  home.sessionPath = [
+    "$HOME/.local/bin"
+    "/opt/homebrew/bin"
+    "$HOME/go/bin"
+  ];
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -34,6 +45,7 @@
     pkgs.nerd-fonts.jetbrains-mono
     #pkgs.ghostty
     #(pkgs.callPackage ./sigtop.nix {})
+    pkgs.ansible
     pkgs.fd
     pkgs.uv
     pkgs.nodejs
@@ -90,8 +102,7 @@
     #   org.gradle.daemon.idletimeout=3600000
     # '';
     ".config/starship.toml".source = dotfiles/starship.toml;
-    ".local/bin/bazel".source =
-      config.lib.file.mkOutOfStoreSymlink "${pkgs.bazelisk}/bin/bazelisk";
+    ".local/bin/bazel".source = config.lib.file.mkOutOfStoreSymlink "${pkgs.bazelisk}/bin/bazelisk";
     # ".local/bin/zed".source =
     #   config.lib.file.mkOutOfStoreSymlink "/opt/homebrew/bin/zed-preview";
   };
@@ -153,18 +164,25 @@
     ];
     userKeymaps = { };
     userSettings = {
-      features = { edit_prediction_provider = "copilot"; };
+      features = {
+        edit_prediction_provider = "copilot";
+      };
       format_on_save = "on";
       vim_mode = true;
       journal = {
         path = "-";
         hour_format = "hour24";
       };
-      tabs = { git_status = true; };
+      tabs = {
+        git_status = true;
+      };
       relative_line_numbers = true;
       soft_wrap = "editor_width";
       preferred_line_length = 120;
-      wrap_guides = [ 80 120 ];
+      wrap_guides = [
+        80
+        120
+      ];
       # context_servers = {
       #   linear = {
       #     command = {
@@ -201,7 +219,9 @@
               "GITHUB_PERSONAL_ACCESS_TOKEN"
               "ghcr.io/github/github-mcp-server"
             ];
-            env = { GITHUB_PERSONAL_ACCESS_TOKEN = "NOOP"; };
+            env = {
+              GITHUB_PERSONAL_ACCESS_TOKEN = "NOOP";
+            };
           };
           settings = { };
         };
@@ -216,7 +236,11 @@
         "Cloudflare Docs" = {
           command = {
             path = "npx";
-            args = [ "-y" "mcp-remote" "https://docs.mcp.cloudflare.com/sse" ];
+            args = [
+              "-y"
+              "mcp-remote"
+              "https://docs.mcp.cloudflare.com/sse"
+            ];
             env = null;
           };
           settings = { };
@@ -224,7 +248,11 @@
         linear = {
           command = {
             path = "npx";
-            args = [ "-y" "mcp-remote" "https://mcp.linear.app/sse" ];
+            args = [
+              "-y"
+              "mcp-remote"
+              "https://mcp.linear.app/sse"
+            ];
             env = null;
           };
           settings = { };
@@ -250,8 +278,12 @@
     userEmail = "travis@thisguy.codes";
     lfs.enable = true;
     extraConfig = {
-      init = { defaultBranch = "main"; };
-      push = { autoSetupRemote = true; };
+      init = {
+        defaultBranch = "main";
+      };
+      push = {
+        autoSetupRemote = true;
+      };
     };
   };
 
@@ -259,10 +291,14 @@
 
   programs.gh = {
     enable = true;
-    settings = { git_protocol = "ssh"; };
+    settings = {
+      git_protocol = "ssh";
+    };
   };
 
-  programs.gh-dash = { enable = true; };
+  programs.gh-dash = {
+    enable = true;
+  };
 
   programs.ssh = {
     enable = true;
@@ -271,10 +307,15 @@
     controlPersist = "10m";
     forwardAgent = true;
     hashKnownHosts = true;
-    extraConfig =
-      "IdentityAgent %d/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh";
+    extraConfig = "IdentityAgent %d/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh";
     matchBlocks = {
       "bastion-pentest25.babylist-prod.com" = {
+        identityFile = "~/.ssh/aws-codecommit";
+      };
+      "bastion.babylist-stage.com" = {
+        identityFile = "~/.ssh/aws-codecommit";
+      };
+      "bastion.babylist-prod.com" = {
         identityFile = "~/.ssh/aws-codecommit";
       };
     };
@@ -299,63 +340,69 @@
     enableVteIntegration = true;
     autocd = true;
     autosuggestion.enable = true;
-    autosuggestion.strategy = [ "match_prev_cmd" "history" "completion" ];
+    autosuggestion.strategy = [
+      "match_prev_cmd"
+      "history"
+      "completion"
+    ];
     #initExtra = "eval \"\$(${pkgs.zellij}/bin/zellij setup --generate-completion zsh)\"";
-    initContent = let
-      entries = {
-        deriveFunc = lib.mkOrder 1000 ''
-          derive() {
-            zparseopts -E -D -- \
-              u=update \
-              -update=update
-            if [[ "$update" ]]; then
-              (
-                cd ~/.config/nix-darwin
-                nix flake update
-              )
-            fi
-            sudo darwin-rebuild switch --flake ~/.config/nix-darwin
-          }
-        '';
-        viMode = lib.mkOrder 2000 ''
-          bindkey -v
-        '';
-        disableSystemCompinit = lib.mkOrder 0 ''
-          skip_global_compinit=1
-        '';
-        fuzzyCompletions = lib.mkOrder 2000 ''
-          zstyle ':completion:*' completer _complete _match _approximate
-          zstyle ':completion:*:match:*' original only
-          zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3>7?7:($#PREFIX+$#SUFFIX)/3))numeric)'
-        '';
-        prettyCompletions = lib.mkOrder 2000 ''
-          zstyle ':completion:*:matches' group 'yes'
-          zstyle ':completion:*:options' description 'yes'
-          zstyle ':completion:*:options' auto-description '%d'
-          zstyle ':completion:*:corrections' format ' %F{green}-- %d (errors: %e) --%f'
-          zstyle ':completion:*:descriptions' format ' %F{yellow}-- %d --%f'
-          zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
-          zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
-          zstyle ':completion:*:default' list-prompt '%S%M matches%s'
-          zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
-          zstyle ':completion:*' group-name '''
-          zstyle ':completion:*' verbose yes
-          zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-          zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
-          zstyle ':completion:*' use-cache true
-          zstyle ':completion:*' rehash true
-        '';
-        menuCompletions = lib.mkOrder 2000 ''
-          zstyle ':completion:*' menu select
-        '';
-        colorCompletions = lib.mkOrder 2000 ''
-          zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS}
-        '';
-        # forGit = lib.mkOrder 2000 ''
-        #   zi as'null' wait'1' lucid for sbin wfxr/forgit
-        # '';
-      };
-    in lib.mkMerge (lib.attrValues entries);
+    initContent =
+      let
+        entries = {
+          deriveFunc = lib.mkOrder 1000 ''
+            derive() {
+              zparseopts -E -D -- \
+                u=update \
+                -update=update
+              if [[ "$update" ]]; then
+                (
+                  cd ~/.config/nix-darwin
+                  nix flake update
+                )
+              fi
+              sudo darwin-rebuild switch --flake ~/.config/nix-darwin
+            }
+          '';
+          viMode = lib.mkOrder 2000 ''
+            bindkey -v
+          '';
+          disableSystemCompinit = lib.mkOrder 0 ''
+            skip_global_compinit=1
+          '';
+          fuzzyCompletions = lib.mkOrder 2000 ''
+            zstyle ':completion:*' completer _complete _match _approximate
+            zstyle ':completion:*:match:*' original only
+            zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3>7?7:($#PREFIX+$#SUFFIX)/3))numeric)'
+          '';
+          prettyCompletions = lib.mkOrder 2000 ''
+            zstyle ':completion:*:matches' group 'yes'
+            zstyle ':completion:*:options' description 'yes'
+            zstyle ':completion:*:options' auto-description '%d'
+            zstyle ':completion:*:corrections' format ' %F{green}-- %d (errors: %e) --%f'
+            zstyle ':completion:*:descriptions' format ' %F{yellow}-- %d --%f'
+            zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
+            zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
+            zstyle ':completion:*:default' list-prompt '%S%M matches%s'
+            zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
+            zstyle ':completion:*' group-name '''
+            zstyle ':completion:*' verbose yes
+            zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+            zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
+            zstyle ':completion:*' use-cache true
+            zstyle ':completion:*' rehash true
+          '';
+          menuCompletions = lib.mkOrder 2000 ''
+            zstyle ':completion:*' menu select
+          '';
+          colorCompletions = lib.mkOrder 2000 ''
+            zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS}
+          '';
+          # forGit = lib.mkOrder 2000 ''
+          #   zi as'null' wait'1' lucid for sbin wfxr/forgit
+          # '';
+        };
+      in
+      lib.mkMerge (lib.attrValues entries);
     history = {
       append = true;
       expireDuplicatesFirst = true;
@@ -390,12 +437,17 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  services.ollama = if builtins.elem "ollama" roles then {
-    enable = true;
-    host = tailconfig.ip;
-  } else if builtins.elem "work" roles then {
-    enable = true;
-    host = "localhost";
-  } else
-    { };
+  services.ollama =
+    if builtins.elem "ollama" roles then
+      {
+        enable = true;
+        host = tailconfig.ip;
+      }
+    else if builtins.elem "work" roles then
+      {
+        enable = true;
+        host = "localhost";
+      }
+    else
+      { };
 }

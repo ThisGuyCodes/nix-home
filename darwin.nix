@@ -38,6 +38,8 @@
     };
     brews = [
       "mas"
+      "gemini-cli"
+      "ast-grep"
     ]
     ++ (
       if builtins.elem "work" roles then
@@ -54,14 +56,12 @@
           # ugh, web...
           "shared-mime-info"
           "mysql@8.0"
-          "ast-grep"
         ]
       else
         [ ]
     );
     taps = [
       "brewforge/extras"
-      "grishka/grishka"
     ]
     ++ (if builtins.elem "work" roles then [ "withgraphite/tap" ] else [ ]);
     casks = [
