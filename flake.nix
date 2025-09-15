@@ -30,6 +30,7 @@
           ...
         }:
         nix-darwin.lib.darwinSystem {
+          # TODO: an array of... functions?!
           modules = [
             ./darwin.nix
             home-manager.darwinModules.home-manager
@@ -42,6 +43,13 @@
               home-manager.extraSpecialArgs = {
                 inherit roles taildomain tailconfig;
               };
+            }
+            {
+              nixpkgs.config.allowUnfreePredicate =
+                pkg:
+                builtins.elem (nixpkgs.lib.getName pkg) [
+                  "terraform"
+                ];
             }
           ];
           specialArgs = {
