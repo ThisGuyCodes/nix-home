@@ -305,13 +305,16 @@
 
   programs.ssh = {
     enable = true;
-    compression = true;
-    controlMaster = "auto";
-    controlPersist = "10m";
-    forwardAgent = true;
-    hashKnownHosts = true;
+    enableDefaultConfig = false;
     extraConfig = "IdentityAgent %d/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh";
     matchBlocks = {
+      "*" = {
+        compression = true;
+        forwardAgent = true;
+        controlMaster = "auto";
+        controlPersist = "10m";
+        hashKnownHosts = true;
+      };
       "bastion-pentest25.babylist-prod.com" = {
         identityFile = "~/.ssh/aws-codecommit";
       };
