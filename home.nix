@@ -280,6 +280,7 @@
     userEmail = "travis@thisguy.codes";
     lfs.enable = true;
     extraConfig = {
+      core.editor = "zed --wait";
       init = {
         defaultBranch = "main";
       };
