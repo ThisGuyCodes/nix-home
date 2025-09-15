@@ -34,6 +34,8 @@
             ./darwin.nix
             home-manager.darwinModules.home-manager
             {
+              # TODO: better understand this option
+              # https://discourse.nixos.org/t/home-manager-useuserpackages-useglobalpkgs-settings/34506/4
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.thisguy = import ./home.nix;

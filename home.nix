@@ -5,6 +5,7 @@
   lib,
   roles,
   tailconfig,
+  nixpkgs,
   ...
 }:
 
@@ -26,6 +27,12 @@
     "/opt/homebrew/bin"
     "$HOME/go/bin"
   ];
+
+  # nixpkgs.config.allowUnfreePredicate =
+  #   pkg:
+  #   builtins.elem (lib.getName pkg) [
+  #     "terraform"
+  #   ];
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -61,9 +68,9 @@
     pkgs.tree
     # pkgs.comby ocaml is borked?
     pkgs.yt-dlp
-    pkgs.terraformer
-    pkgs.terraform
-    pkgs.terragrunt
+    # pkgs.terraformer
+    # pkgs.terraform
+    # pkgs.terragrunt
     # (pkgs.callPackage ./terragrunt.nix { })
     #(pkgs.callPackage ./go-mockery.nix {})
     # pkgs.opentofu
