@@ -10,12 +10,25 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nix-darwin, home-manager, nixpkgs, ... }:
+  outputs =
+    inputs@{
+      self,
+      nix-darwin,
+      home-manager,
+      nixpkgs,
+      ...
+    }:
     let
-      setup = { tailconfig ? {
-        ip = "127.0.0.1";
-        name = "";
-      }, roles ? [ ], taildomain ? "giraffe-ide.ts.net", ... }:
+      setup =
+        {
+          tailconfig ? {
+            ip = "127.0.0.1";
+            name = "";
+          },
+          roles ? [ ],
+          taildomain ? "giraffe-ide.ts.net",
+          ...
+        }:
         nix-darwin.lib.darwinSystem {
           modules = [
             ./darwin.nix
@@ -34,7 +47,8 @@
             inherit roles taildomain tailconfig;
           };
         };
-    in {
+    in
+    {
       # Build darwin flake using:
       # $ darwin-rebuild build --flake .#Traviss-MacBook-Pro
       darwinConfigurations."Traviss-MacBook-Pro" = setup {
