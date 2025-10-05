@@ -358,7 +358,26 @@
     initContent =
       let
         entries = {
-          deriveFunc = lib.mkOrder 1000 ''
+          opts = lib.mkOrder 499 ''
+            setopt autopushd
+          '';
+          aliases = lib.mkOrder 1501 ''
+            alias cdg='cd $(git rev-parse --show-toplevel)'
+          '';
+          # expandDots = lib.mkOrder 1501 ''
+          #   function _expand-dot-to-parent-directory-path {
+          #     if [[ $LBUFFER = *..  && -d $LBUFFER ]]; then
+          #       LBUFFER+='/..'
+          #     else
+          #       LBUFFER+='.'
+          #     fi
+          #   }
+          #   zle -N _expand-dot-to-parent-directory-path
+          #   for keymap in 'emacs' 'viins'; do
+          #     bindkey -M "$keymap" "." expand-dot-to-parent-directory-path
+          #   done
+          # '';
+          deriveFunc = lib.mkOrder 1501 ''
             derive() {
               zparseopts -E -D -- \
                 u=update \
@@ -372,18 +391,18 @@
               sudo darwin-rebuild switch --flake ~/.config/nix-darwin
             }
           '';
-          viMode = lib.mkOrder 2000 ''
+          viMode = lib.mkOrder 1001 ''
             bindkey -v
           '';
           disableSystemCompinit = lib.mkOrder 0 ''
             skip_global_compinit=1
           '';
-          fuzzyCompletions = lib.mkOrder 2000 ''
+          fuzzyCompletions = lib.mkOrder 1001 ''
             zstyle ':completion:*' completer _complete _match _approximate
             zstyle ':completion:*:match:*' original only
             zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3>7?7:($#PREFIX+$#SUFFIX)/3))numeric)'
           '';
-          prettyCompletions = lib.mkOrder 2000 ''
+          prettyCompletions = lib.mkOrder 1001 ''
             zstyle ':completion:*:matches' group 'yes'
             zstyle ':completion:*:options' description 'yes'
             zstyle ':completion:*:options' auto-description '%d'
@@ -400,10 +419,10 @@
             zstyle ':completion:*' use-cache true
             zstyle ':completion:*' rehash true
           '';
-          menuCompletions = lib.mkOrder 2000 ''
+          menuCompletions = lib.mkOrder 1001 ''
             zstyle ':completion:*' menu select
           '';
-          colorCompletions = lib.mkOrder 2000 ''
+          colorCompletions = lib.mkOrder 1001 ''
             zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS}
           '';
           # forGit = lib.mkOrder 2000 ''
