@@ -60,6 +60,7 @@
     pkgs.jq
     pkgs.yq
     pkgs.tree
+    pkgs.talosctl
     # pkgs.comby ocaml is borked?
     pkgs.yt-dlp
     pkgs.terraformer
