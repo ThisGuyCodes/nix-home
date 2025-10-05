@@ -436,7 +436,12 @@
       expireDuplicatesFirst = true;
       extended = true;
       ignoreAllDups = true;
+      ignoreSpace = true;
+      saveNoDups = true;
+      share = true;
+      size = 100000;
     };
+    historySubstringSearch.enable = true;
   };
 
   programs.fzf = {
