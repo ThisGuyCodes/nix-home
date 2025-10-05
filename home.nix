@@ -76,6 +76,7 @@
     pkgs.ollama
 
     pkgs.graphviz
+    pkgs.pre-commit
 
     # dev env stuff
     # pkgs.zed-editor
