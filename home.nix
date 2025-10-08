@@ -314,7 +314,7 @@
       "*" = {
         compression = true;
         forwardAgent = true;
-        controlMaster = "no";
+        controlMaster = "auto";
         controlPersist = "10m";
         hashKnownHosts = true;
       };
