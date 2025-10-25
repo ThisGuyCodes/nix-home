@@ -91,6 +91,9 @@
     pkgs.nixfmt
     pkgs.gopls
     pkgs.go
+
+    # my own stuff
+    (pkgs.writeScriptBin "zip2img" (builtins.readFile ./tools/zip2img))
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

@@ -1,0 +1,29 @@
+#!/usr/bin/env zsh
+set -euxo pipefail
+
+zipFile=$1
+shift
+
+size=$(unzip -p $zipFile | wc -c)
+
+blocks=$((size / 10 * 11 / 1024 / 1024))
+
+diskFileDir=$(mktemp --directory)
+
+dd if=/dev/zero of=$diskFileDir/disk.img bs=1m count=$blocks
+
+devEntry=$(hdiutil attach -nomount $diskFileDir/disk.img)
+devEntry=$(echo ${=devEntry})
+TRAPEXIT() {
+    hdiutil detach $devEntry
+}
+
+devName=$RANDOM
+
+diskutil erasedisk exfat $devName mbr $devEntry
+
+unzip -o -d /Volumes/$devName $zipFile
+
+dot_clean /Volumes/$devName
+
+mv $diskFileDir/disk.img disk.img
