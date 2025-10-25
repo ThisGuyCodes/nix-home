@@ -276,13 +276,18 @@
     enableZshIntegration = true;
   };
 
+  programs.difftastic = {
+    git.enable = true;
+  };
+
   programs.git = {
     enable = true;
-    difftastic.enable = true;
-    userName = "Travis Johnson";
-    userEmail = "travis@thisguy.codes";
+    settings.user = {
+      name = "Travis Johnson";
+      email = "travis@thisguy.codes";
+    };
     lfs.enable = true;
-    extraConfig = {
+    settings = {
       core.editor = "zed --wait";
       init = {
         defaultBranch = "main";
