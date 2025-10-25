@@ -20,7 +20,7 @@ TRAPEXIT() {
 
 devName=$RANDOM
 
-diskutil erasedisk exfat $devName mbr $devEntry
+diskutil erasedisk fat32 $devName mbr $devEntry
 
 unzip -o -d /Volumes/$devName $zipFile
 
