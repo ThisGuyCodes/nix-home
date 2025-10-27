@@ -68,12 +68,5 @@
           name = "oc";
         };
       };
-      darwinConfigurations."BL-travis-johnson" = setup {
-        roles = [ "work" ];
-        tailconfig = {
-          ip = "100.92.252.68";
-          name = "bl-travis-johnson";
-        };
-      };
     };
 }
