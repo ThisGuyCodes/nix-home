@@ -300,6 +300,7 @@
       push = {
         autoSetupRemote = true;
       };
+      commit.gpgsign = true;
     };
   };
 
