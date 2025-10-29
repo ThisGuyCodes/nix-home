@@ -93,6 +93,8 @@
     pkgs.gopls
     pkgs.go
 
+    pkgs.gitify
+
     # my own stuff
     (pkgs.writeScriptBin "zip2img" (builtins.readFile ./tools/zip2img))
   ];

@@ -75,6 +75,7 @@
       "zed"
       "notion"
       "yubico-authenticator"
+      "gitify"
       # "gpg-suite-no-mail"
       # {
       #   name = "grishka/grishka/neardrop";
