@@ -301,6 +301,7 @@
         autoSetupRemote = true;
       };
       commit.gpgsign = true;
+      log.showSignature = true;
     };
   };
 
