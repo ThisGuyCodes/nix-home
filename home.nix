@@ -286,6 +286,11 @@
     git.enable = true;
   };
 
+  programs.kubeswitch = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
   programs.git = {
     enable = true;
     lfs.enable = true;
