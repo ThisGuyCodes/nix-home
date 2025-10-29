@@ -482,6 +482,13 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  services.gpg-agent = {
+    enable = true;
+    enableScDaemon = true;
+    enableZshIntegration = true;
+    defaultCacheTtl = 3600;
+  };
+
   services.ollama =
     if builtins.elem "ollama" roles then
       {
