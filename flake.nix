@@ -68,5 +68,8 @@
           name = "oc";
         };
       };
+      darwinConfigurations.ThisGrunt = setup {
+        roles = [ "ollama" ];
+      };
     };
 }

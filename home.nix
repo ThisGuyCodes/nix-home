@@ -61,6 +61,7 @@
     pkgs.yq
     pkgs.tree
     pkgs.talosctl
+    pkgs.gnupg
     # pkgs.comby ocaml is borked?
     pkgs.yt-dlp
     pkgs.terraformer
@@ -285,12 +286,13 @@
 
   programs.git = {
     enable = true;
-    settings.user = {
-      name = "Travis Johnson";
-      email = "travis@thisguy.codes";
-    };
     lfs.enable = true;
     settings = {
+      user = {
+        name = "Travis Johnson";
+        email = "travis@thisguy.codes";
+        signingkey = "F7B1F29963D9D8B261A707D201E95421D282D509";
+      };
       core.editor = "zed --wait";
       init = {
         defaultBranch = "main";

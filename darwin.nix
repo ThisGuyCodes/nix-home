@@ -40,6 +40,7 @@
       "mas"
       "gemini-cli"
       "ast-grep"
+      "ykman"
     ]
     ++ (
       if builtins.elem "work" roles then
@@ -72,6 +73,9 @@
       "signal"
       "rectangle-pro"
       "zed"
+      "notion"
+      "yubico-authenticator"
+      # "gpg-suite-no-mail"
       # {
       #   name = "grishka/grishka/neardrop";
       #   args = { no_quarantine = true; };
@@ -84,6 +88,7 @@
       openin = 1643649331;
       bitwarden = 1352778147;
       tailscale = 1475387142;
+      slack = 803453959;
     };
   };
 
