@@ -140,7 +140,7 @@
   };
 
   programs.zed-editor = {
-    enable = false;
+    enable = true;
     extensions = [
       "ansible"
       "deno"
@@ -155,7 +155,7 @@
       "make"
       "markdown-oxide"
       "mcp-server-github"
-      "mcp-server-linear"
+      # "mcp-server-linear"
       "mermaid"
       "nginx"
       "nix"
