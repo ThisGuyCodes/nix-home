@@ -78,6 +78,7 @@
 
     pkgs.graphviz
     pkgs.pre-commit
+    (pkgs.callPackage ./cosign.nix { })
 
     # dev env stuff
     # pkgs.zed-editor
@@ -173,7 +174,7 @@
       "wgsl-wesl"
       "xml"
     ];
-    userKeymaps = { };
+    userKeymaps = [ ];
     userSettings = {
       features = {
         edit_prediction_provider = "copilot";
@@ -194,15 +195,6 @@
         80
         120
       ];
-      # context_servers = {
-      #   linear = {
-      #     command = {
-      #       path = "npx";
-      #       args = [ "-y" "mcp-remote" "https://mcp.linear.app/sse" ];
-      #     };
-      #     settings = { };
-      #   };
-      # };
       lsp = {
         typos.initialization_options.diagnosticSeverity = "Hint";
         nil.initialization_options.formatting.command = [ "nixfmt" ];
@@ -216,57 +208,32 @@
           provider = "google";
           model = "gemini-2.5-flash-preview-04-17";
         };
-        version = "2";
       };
       context_servers = {
         Github = {
-          command = {
-            path = "podman";
-            args = [
-              "run"
-              "-i"
-              "--rm"
-              "-e"
-              "GITHUB_PERSONAL_ACCESS_TOKEN"
-              "ghcr.io/github/github-mcp-server"
-            ];
-            env = {
-              GITHUB_PERSONAL_ACCESS_TOKEN = "NOOP";
-            };
+          source = "custom";
+          command = "podman";
+          args = [
+            "run"
+            "-i"
+            "--rm"
+            "-e"
+            "GITHUB_PERSONAL_ACCESS_TOKEN"
+            "ghcr.io/github/github-mcp-server"
+          ];
+          env = {
+            GITHUB_PERSONAL_ACCESS_TOKEN = "NOOP";
           };
-          settings = { };
         };
-        # Jira = {
-        #   command = {
-        #     path = "npx";
-        #     args = [ "-y" "mcp-remote" "https://mcp.atlassian.com/v1/sse" ];
-        #     env = null;
-        #   };
-        #   settings = { };
-        # };
         "Cloudflare Docs" = {
-          command = {
-            path = "npx";
-            args = [
-              "-y"
-              "mcp-remote"
-              "https://docs.mcp.cloudflare.com/sse"
-            ];
-            env = null;
-          };
-          settings = { };
-        };
-        linear = {
-          command = {
-            path = "npx";
-            args = [
-              "-y"
-              "mcp-remote"
-              "https://mcp.linear.app/sse"
-            ];
-            env = null;
-          };
-          settings = { };
+          source = "custom";
+          command = "npx";
+          args = [
+            "-y"
+            "mcp-remote"
+            "https://docs.mcp.cloudflare.com/sse"
+          ];
+          env = null;
         };
       };
     };
