@@ -95,6 +95,7 @@
     pkgs.go
 
     pkgs.gitify
+    pkgs.gemini-cli
 
     # my own stuff
     (pkgs.writeScriptBin "zip2img" (builtins.readFile ./tools/zip2img))

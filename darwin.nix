@@ -38,7 +38,7 @@
     };
     brews = [
       "mas"
-      "gemini-cli"
+      # "gemini-cli"
       "ast-grep"
       "ykman"
     ]
