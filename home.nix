@@ -212,21 +212,21 @@
         };
       };
       context_servers = {
-        Github = {
-          source = "custom";
-          command = "podman";
-          args = [
-            "run"
-            "-i"
-            "--rm"
-            "-e"
-            "GITHUB_PERSONAL_ACCESS_TOKEN"
-            "ghcr.io/github/github-mcp-server"
-          ];
-          env = {
-            GITHUB_PERSONAL_ACCESS_TOKEN = "NOOP";
-          };
-        };
+        # Github = {
+        #   source = "custom";
+        #   command = "podman";
+        #   args = [
+        #     "run"
+        #     "-i"
+        #     "--rm"
+        #     "-e"
+        #     "GITHUB_PERSONAL_ACCESS_TOKEN"
+        #     "ghcr.io/github/github-mcp-server"
+        #   ];
+        #   env = {
+        #     GITHUB_PERSONAL_ACCESS_TOKEN = "NOOP";
+        #   };
+        # };
         "Cloudflare Docs" = {
           source = "custom";
           command = "npx";
