@@ -138,11 +138,7 @@
   home.sessionVariables = {
     EDITOR = "nvim";
     TG_PROVIDER_CACHE = "1";
-    TERRAGRUNT_PROVIDER_CACHE = "1";
     TG_DEPENDENCY_FETCH_OUTPUT_FROM_STATE = "true";
-    TERRAGRUNT_DEPENDENCY_FETCH_OUTPUT_FROM_STATE = "true";
-    TG_STRICT_CONTROL = "skip-dependencies-inputs";
-    TERRAGRUNT_STRICT_CONTROL = "skip-dependencies-inputs";
   };
 
   programs.zed-editor = {
