@@ -179,7 +179,7 @@
     userKeymaps = [ ];
     userSettings = {
       features = {
-        edit_prediction_provider = "copilot";
+        edit_prediction_provider = "zed";
       };
       format_on_save = "on";
       vim_mode = true;
