@@ -73,17 +73,22 @@
     pkgs.awscli2
     pkgs.aws-vault
     pkgs.podman
+    pkgs.docker
+    # pkgs.podman-desktop
     pkgs.podman-tui
     pkgs.ollama
 
     pkgs.graphviz
     pkgs.pre-commit
     (pkgs.callPackage ./cosign.nix { })
+    # pkgs.cosign
 
     # dev env stuff
     # pkgs.zed-editor
     pkgs.devenv
     pkgs.direnv
+
+    pkgs.delve
 
     pkgs.ffmpeg
 

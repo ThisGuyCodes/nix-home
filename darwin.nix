@@ -76,6 +76,9 @@
       "notion"
       "yubico-authenticator"
       "gitify"
+      # "podman-desktop"
+      "docker-desktop"
+      "linear-linear"
       # "gpg-suite-no-mail"
       # {
       #   name = "grishka/grishka/neardrop";
