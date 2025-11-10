@@ -65,7 +65,7 @@
     # pkgs.comby ocaml is borked?
     pkgs.yt-dlp
     pkgs.terraformer
-    pkgs.terraform
+    # pkgs.terraform
     pkgs.terragrunt
     # (pkgs.callPackage ./terragrunt.nix { })
     #(pkgs.callPackage ./go-mockery.nix {})
