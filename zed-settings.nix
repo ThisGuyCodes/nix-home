@@ -18,7 +18,7 @@
   tabs = {
     git_status = true;
   };
-  relative_line_numbers = true;
+  relative_line_numbers = "enabled";
   soft_wrap = "editor_width";
   preferred_line_length = 120;
   wrap_guides = [
