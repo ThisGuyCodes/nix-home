@@ -1,5 +1,11 @@
 { }:
 {
+  file_types = {
+    "GitHub Actions" = [
+      ".github/workflows/*.yml"
+      ".github/workflows/*.yaml"
+    ];
+  };
   features = {
     edit_prediction_provider = "zed";
   };

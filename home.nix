@@ -144,6 +144,7 @@
   programs.zed-editor = {
     enable = true;
     extensions = [
+      "github-actions"
       "ansible"
       "deno"
       "dockerfile"
