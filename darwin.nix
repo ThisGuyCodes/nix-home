@@ -79,6 +79,7 @@
       # "podman-desktop"
       "docker-desktop"
       "linear-linear"
+      "zoom"
       # "gpg-suite-no-mail"
       # {
       #   name = "grishka/grishka/neardrop";
