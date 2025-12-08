@@ -71,5 +71,7 @@
       darwinConfigurations.ThisGrunt = setup {
         roles = [ "ollama" ];
       };
+      darwinConfigurations.ThisBase = setup {
+      };
     };
 }
