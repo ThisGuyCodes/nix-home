@@ -226,7 +226,8 @@
         autoSetupRemote = true;
       };
       commit.gpgsign = true;
-      log.showSignature = true;
+      # TODO: only disable this on specific machine
+      # log.showSignature = true;
     };
   };
 
