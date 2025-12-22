@@ -62,6 +62,15 @@
     pkgs.tree
     pkgs.talosctl
     pkgs.gnupg
+    pkgs.helm-ls
+    pkgs.yaml-language-server
+
+    # baseten
+    pkgs.rancher
+    pkgs.proto
+    pkgs.helmsman
+    pkgs.fluxcd
+
     # pkgs.comby ocaml is borked?
     pkgs.yt-dlp
     pkgs.terraformer
