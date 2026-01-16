@@ -302,6 +302,7 @@
           aliases = lib.mkOrder 1501 ''
             alias cdg='cd $(git rev-parse --show-toplevel)'
           '';
+          nsenter = lib.mkOrder 1502 (builtins.readFile ./nsenter.zsh);
           # expandDots = lib.mkOrder 1501 ''
           #   function _expand-dot-to-parent-directory-path {
           #     if [[ $LBUFFER = *..  && -d $LBUFFER ]]; then
