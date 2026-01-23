@@ -62,6 +62,7 @@
     pkgs.tree
     pkgs.talosctl
     pkgs.gnupg
+    pkgs.difftastic
     pkgs.helm-ls
     pkgs.yaml-language-server
 
@@ -213,11 +214,31 @@
     enable = true;
     lfs.enable = true;
     settings = {
+      alias = {
+        fc = "!f(){ git diff --name-only --pretty='' $1..HEAD | sort | uniq; }; f";
+        cam = "commit -am";
+        cm = "commit -m";
+        co = "checkout";
+        cob = "checkout -b";
+        uncommit = "reset --soft HEAD^";
+        unadd = "reset HEAD --";
+        discard = "reset HEAD --hard";
+        wipe = "clean -fd";
+        pr = "!f() { git fetch --force origin pull/$1/head:pr-$1; }; f";
+        dfm = "diff HEAD main --";
+      };
       user = {
         name = "Travis Johnson";
         email = "travis@thisguy.codes";
         signingkey = "F7B1F29963D9D8B261A707D201E95421D282D509";
       };
+      diff.external = "difft";
+      difftool."difftastic" = {
+        cmd = "difft \"$MERGED\" \"$LOCAL\" \"abcdef1\" \"100644\" \"$REMOTE\" \"abcdef2\" \"100644\"";
+      };
+      diff.tool = "difftastic";
+      difftool.prompt = false;
+      pager.difftool = true;
       core.editor = "zed --wait";
       init = {
         defaultBranch = "main";
