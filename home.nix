@@ -239,7 +239,9 @@
       diff.tool = "difftastic";
       difftool.prompt = false;
       pager.difftool = true;
-      core.editor = "zed --wait";
+      # issues with rebase files keeping old content
+      # core.editor = "zed --wait";
+      core.editor = "nvim";
       init = {
         defaultBranch = "main";
       };
