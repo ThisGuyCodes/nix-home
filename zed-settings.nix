@@ -1,5 +1,10 @@
 { }:
 {
+  terminal = {
+    env = {
+      RIPGREP_CONFIG_PATH = "${./zed-rg.rc}";
+    };
+  };
   file_types = {
     "GitHub Actions" = [
       ".github/workflows/*.yml"
