@@ -36,6 +36,12 @@
     terraform-ls.initialization_options = {
       experimentalFeatures.prefillRequiredFields = true;
     };
+    gopls.initialization_options = {
+      templateExtension = "gotmpl";
+      usePlaceholders = true;
+      staticcheck = true;
+      gofumpt = true;
+    };
   };
   agent = {
     always_allow_tool_actions = true;

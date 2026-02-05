@@ -163,6 +163,7 @@
       "go-snippits"
       "golangci-lint"
       "gosum"
+      "gotmpl"
       "helm"
       "jsonnet"
       "make"
