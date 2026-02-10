@@ -110,6 +110,7 @@
 
     # my own stuff
     (pkgs.writeScriptBin "zip2img" (builtins.readFile ./tools/zip2img))
+    (pkgs.writeScriptBin "nsender" (builtins.readFile ./tools/nsender))
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -322,7 +323,6 @@
           aliases = lib.mkOrder 1501 ''
             alias cdg='cd $(git rev-parse --show-toplevel)'
           '';
-          nsenter = lib.mkOrder 1502 (builtins.readFile ./nsenter.zsh);
           # expandDots = lib.mkOrder 1501 ''
           #   function _expand-dot-to-parent-directory-path {
           #     if [[ $LBUFFER = *..  && -d $LBUFFER ]]; then
