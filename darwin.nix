@@ -80,6 +80,7 @@
       "docker-desktop"
       "linear-linear"
       "zoom"
+      "1password"
       # "gpg-suite-no-mail"
       # {
       #   name = "grishka/grishka/neardrop";
