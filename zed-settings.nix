@@ -2,7 +2,7 @@
 {
   terminal = {
     env = {
-      RIPGREP_CONFIG_PATH = "${./zed-rg.rc}";
+      RIPGREP_CONFIG_PATH = "${./dotfiles/zed-rg.rc}";
     };
   };
   file_types = {
