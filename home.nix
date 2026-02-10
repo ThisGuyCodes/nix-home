@@ -75,10 +75,7 @@
     # pkgs.comby ocaml is borked?
     pkgs.yt-dlp
     pkgs.terraformer
-    # pkgs.terraform
     pkgs.terragrunt
-    # (pkgs.callPackage ./terragrunt.nix { })
-    #(pkgs.callPackage ./go-mockery.nix {})
     # pkgs.opentofu
     pkgs.awscli2
     pkgs.aws-vault
