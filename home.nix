@@ -148,45 +148,8 @@
     TG_DEPENDENCY_FETCH_OUTPUT_FROM_STATE = "true";
   };
 
-  programs.zed-editor = {
+  programs.zed-editor = import ./zed-settings.nix {
     enable = true;
-    extensions = [
-      "github-actions"
-      "ansible"
-      "deno"
-      "dockerfile"
-      "duckyscript"
-      "gleam"
-      "go-snippits"
-      "golangci-lint"
-      "gosum"
-      "gotmpl"
-      "helm"
-      "jsonnet"
-      "make"
-      "markdown-oxide"
-      "mcp-server-github"
-      # "mcp-server-linear"
-      "mermaid"
-      "nginx"
-      "nix"
-      "ruby"
-      "ruff"
-      "sql"
-      "ssh-config"
-      "starlark"
-      "superhtml"
-      "templ"
-      "terraform"
-      "tmux"
-      "toml"
-      "typos"
-      "vhs"
-      "wgsl-wesl"
-      "xml"
-    ];
-    userKeymaps = [ ];
-    userSettings = import ./zed-settings.nix { };
   };
 
   programs.mise = {
