@@ -1,1 +1,1 @@
---hyperlink-format='file://{path}:{line}:{column}'
+--hyperlink-format=file://{path}:{line}:{column}
