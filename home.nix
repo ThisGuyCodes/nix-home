@@ -87,8 +87,7 @@
 
     pkgs.graphviz
     pkgs.pre-commit
-    (pkgs.callPackage ./cosign.nix { })
-    # pkgs.cosign
+    pkgs.cosign
 
     # dev env stuff
     # pkgs.zed-editor
