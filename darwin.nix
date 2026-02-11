@@ -41,31 +41,22 @@
       # "gemini-cli"
       "ast-grep"
       "ykman"
+      "opencode"
     ]
     ++ (
       if builtins.elem "work" roles then
         [
-          "withgraphite/tap/graphite"
-
-          # ugh, ruby-build...
-          "openssl@3"
-          "readline"
-          "libyaml"
-          "gmp"
-          "autoconf"
-
-          # ugh, web...
-          "shared-mime-info"
-          "mysql@8.0"
         ]
       else
         [ ]
     );
     taps = [
       "brewforge/extras"
+      "anomalyco/tap"
     ]
     ++ (if builtins.elem "work" roles then [ "withgraphite/tap" ] else [ ]);
     casks = [
+      "opencode-desktop"
       "secretive"
       "discord"
       "google-chrome"
