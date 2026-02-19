@@ -111,9 +111,12 @@
     pkgs.gitify
     pkgs.gemini-cli
 
+    pkgs.terraform-docs
+
     # my own stuff
     (pkgs.writeScriptBin "zip2img" (builtins.readFile ./tools/zip2img))
     (pkgs.writeScriptBin "nsender" (builtins.readFile ./tools/nsender))
+    (pkgs.writeScriptBin "set-config" (builtins.readFile ./tools/set-config))
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

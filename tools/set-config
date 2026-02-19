@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+set -euo pipefail
+
+
+cd $HOME/.kube
+config=$(ls config.* | cut -d. -f2- | fzf --height ~25% --reverse --border --preview 'yq ".clusters[0].name" $HOME/.kube/config.{}')
+
+ln -Fs config.$config config
