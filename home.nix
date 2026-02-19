@@ -179,6 +179,7 @@
     lfs.enable = true;
     settings = {
       alias = {
+        s = "switch";
         fc = "!f(){ git diff --name-only --pretty='' $1..HEAD | sort | uniq; }; f";
         cam = "commit -am";
         cm = "commit -m";
