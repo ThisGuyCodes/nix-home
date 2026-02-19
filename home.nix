@@ -36,6 +36,7 @@
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
     # # fonts?
     # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
+    pkgs.nix-index
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
@@ -58,13 +59,16 @@
     pkgs.pv
     pkgs.dust
     pkgs.jq
-    pkgs.yq
     pkgs.tree
     pkgs.talosctl
     pkgs.gnupg
     pkgs.difftastic
     pkgs.helm-ls
     pkgs.yaml-language-server
+    pkgs.entr
+
+    # out of date compared to homebrew
+    # pkgs.codex
 
     # baseten
     pkgs.rancher
@@ -75,7 +79,6 @@
     # pkgs.comby ocaml is borked?
     pkgs.yt-dlp
     pkgs.terraformer
-    pkgs.terragrunt
     # pkgs.opentofu
     pkgs.awscli2
     pkgs.aws-vault

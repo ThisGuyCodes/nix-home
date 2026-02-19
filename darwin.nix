@@ -56,6 +56,8 @@
     ]
     ++ (if builtins.elem "work" roles then [ "withgraphite/tap" ] else [ ]);
     casks = [
+      "1password-cli"
+      "codex"
       "opencode-desktop"
       "secretive"
       "discord"
