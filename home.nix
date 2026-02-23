@@ -67,6 +67,8 @@
     pkgs.yaml-language-server
     pkgs.entr
 
+    pkgs.gron
+
     # out of date compared to homebrew
     # pkgs.codex
 
@@ -112,6 +114,14 @@
     pkgs.gemini-cli
 
     pkgs.terraform-docs
+    (pkgs.wrapHelm pkgs.kubernetes-helm {
+      plugins = with pkgs.kubernetes-helmPlugins; [
+        helm-secrets
+        helm-diff
+        helm-s3
+        helm-git
+      ];
+    })
 
     # my own stuff
     (pkgs.writeScriptBin "zip2img" (builtins.readFile ./tools/zip2img))

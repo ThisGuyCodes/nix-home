@@ -56,6 +56,7 @@
     ]
     ++ (if builtins.elem "work" roles then [ "withgraphite/tap" ] else [ ]);
     casks = [
+      "gcloud-cli"
       "1password-cli"
       "codex"
       "opencode-desktop"
