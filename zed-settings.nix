@@ -77,7 +77,7 @@
         experimentalFeatures.prefillRequiredFields = true;
       };
       gopls.initialization_options = {
-        templateExtension = "gotmpl";
+        templateExtensions = "gotmpl";
         usePlaceholders = true;
         staticcheck = true;
         gofumpt = true;
