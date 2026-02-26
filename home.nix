@@ -68,6 +68,9 @@
     pkgs.entr
 
     pkgs.gron
+    pkgs.dive
+    pkgs.pinentry-curses
+    # (pkgs.writeScriptBin "pinentry" "#!/bin/bash\nexec pinentry-curses \"$@\"")
 
     # out of date compared to homebrew
     # pkgs.codex
@@ -79,7 +82,7 @@
     pkgs.fluxcd
 
     # pkgs.comby ocaml is borked?
-    pkgs.yt-dlp
+    # pkgs.yt-dlp
     pkgs.terraformer
     # pkgs.opentofu
     pkgs.awscli2
