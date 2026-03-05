@@ -42,6 +42,9 @@
       "ast-grep"
       "ykman"
       "opencode"
+      # "ollama"
+      "logcli"
+      "yoanbernabeu/tap/grepai"
     ]
     ++ (
       if builtins.elem "work" roles then
@@ -53,6 +56,7 @@
     taps = [
       "brewforge/extras"
       "anomalyco/tap"
+      "yoanbernabeu/tap"
     ]
     ++ (if builtins.elem "work" roles then [ "withgraphite/tap" ] else [ ]);
     casks = [
