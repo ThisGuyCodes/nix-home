@@ -66,6 +66,7 @@
     pkgs.helm-ls
     pkgs.yaml-language-server
     pkgs.entr
+    pkgs.hubble
 
     pkgs.gron
     pkgs.dive
